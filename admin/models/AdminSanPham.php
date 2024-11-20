@@ -248,11 +248,9 @@ class AdminSanPham{
             
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([":id" => $id]);
-            $result = $stmt->fetchALL();
-            return $result ?: []; // Trả về mảng rỗng nếu không có kết quả
+            return $stmt->fetchAll();
         }catch(Exception $e){
             echo "Lỗi: " . $e->getMessage();
-            return [];
         }
     }
     

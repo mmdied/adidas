@@ -142,7 +142,7 @@
                                 <div class="tab-pane fade show active" id="tab1">
                                     <div class="product-carousel-4 slick-row-10 slick-arrow-style">
                                         <!-- product item start -->
-                                         <?php foreach($listSanPham as $key=>$sanPham): ?>
+                                        <?php foreach($listSanPham as $key=>$sanPham): ?>
                                         <div class="product-item">
                                             <figure class="product-thumb">
                                                 <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">

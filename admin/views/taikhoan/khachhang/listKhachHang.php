@@ -43,6 +43,7 @@
                     <th>Ảnh</th>
                     <th>Email </th>
                     <th>SDT </th>
+                    <th>Địa Chỉ</th>
                     <th>Trạng Thái</th>
                     <th>Thao tác</th>
                   </tr>
@@ -56,7 +57,8 @@
                         <img src="<?= BASE_URL . $khachHang['anh_dai_dien'] ?>" style="width:100px" alt="" onerror="this.onerror=null; this.src='https://i0.wp.com/www.stignatius.co.uk/wp-content/uploads/2020/10/default-user-icon.jpg?w=415&ssl=1'">
                       </td>
                    <td><?=$khachHang['email'] ?></td>
-                   <td><?=$khachHang['so_dien_thoai'] ?></td>
+                   <td><?=$khachHang['so_dien_thoai'] ?></td>                  
+                    <td><?=$khachHang['dia_chi'] ?></td>
                    <td><?=$khachHang['trang_thai'] == 1 ? 'Active' : 'Inactive    ' ?></td>
                    <div class="btn-group">
                     <td>

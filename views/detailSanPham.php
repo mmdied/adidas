@@ -112,7 +112,7 @@
                                                     <div class="review-box">
 
                                                         <div class="post-author">
-                                                            <p><span>Khách Hàng -</span><?= $binhLuan['ngay_dang'] ?></p>
+                                                            <p><span><?= $binhLuan['ho_ten'] ?> -</span><?= $binhLuan['ngay_dang'] ?></p>
                                                         </div>
                                                         <p><?= $binhLuan['noi_dung'] ?></p>
                                                     </div>

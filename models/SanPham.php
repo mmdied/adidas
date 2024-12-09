@@ -1,3 +1,4 @@
+
 <?php
 class SanPham {
     public $conn;
@@ -9,10 +10,9 @@ class SanPham {
     //Viết hàm lấy toàn bộ danh sách sản phẩm 
     public function getAllSanPham(){
         try{
-            $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc
-            FROM san_phams
-            INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
-            ';
+            $sql = 'SELECT products.*, categorys.ten_danh_muc
+            FROM products
+            INNER JOIN categorys ON products.danh_muc_id = categorys.id';  
 
             $stmt = $this->conn->prepare($sql);
 
@@ -25,11 +25,11 @@ class SanPham {
     }
     public function getDetailSanPham($id){
         try{
-            $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc 
-            FROM san_phams 
-            INNER JOIN danh_mucs 
-            ON san_phams.danh_muc_id = danh_mucs.id 
-            WHERE san_phams.id = :id';
+            $sql = 'SELECT products.*, categorys.ten_danh_muc 
+            FROM products 
+            INNER JOIN categorys 
+            ON products.danh_muc_id = categorys.id 
+            WHERE products.id = :id';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -42,7 +42,7 @@ class SanPham {
     }
     public function getListAnhSanPham($id){
         try{
-            $sql = "SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = :id";
+            $sql = "SELECT * FROM product_images WHERE san_pham_id = :id";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -55,10 +55,10 @@ class SanPham {
     }
     public function getBinhLuanFromSanPham($id){
         try{
-            $sql = 'SELECT binh_luans.*, tai_khoans.ho_ten, tai_khoans.anh_dai_dien
-                    FROM binh_luans 
-                    INNER JOIN tai_khoans ON binh_luans.tai_khoan_id = tai_khoans.id
-                    WHERE binh_luans.san_pham_id = :id';
+            $sql = 'SELECT comments.*, users.ho_ten, users.anh_dai_dien
+                    FROM comments 
+                    INNER JOIN users ON comments.tai_khoan_id = users.id
+                    WHERE comments.san_pham_id = :id';
             
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([":id" => $id]);
@@ -69,10 +69,10 @@ class SanPham {
     }
     public function getListSanPhamDanhMuc($danh_muc_id){
         try{
-            $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc
-            FROM san_phams
-            INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
-            WHERE san_phams.danh_muc_id = '. $danh_muc_id;
+            $sql = 'SELECT products.*, categorys.ten_danh_muc
+            FROM products
+            INNER JOIN categorys ON products.danh_muc_id = categorys.id
+            WHERE products.danh_muc_id = '. $danh_muc_id;
 
             $stmt = $this->conn->prepare($sql);
 
@@ -83,5 +83,18 @@ class SanPham {
         }
 
     }
+    public function getAllDanhMucClient()
+    {
+        try {
+            $sql = "SELECT * FROM categorys limit 5";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+
 }
 ?>

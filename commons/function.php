@@ -10,10 +10,10 @@ function connectDB() {
     try {
         $conn = new PDO("mysql:host=$host;port=$port;dbname=$dbname", DB_USERNAME, DB_PASSWORD);
 
-        // Cài đặt chế độ báo lỗi là xử lý ngoại lệ
+        // cài đặt chế độ báo lỗi là xử lý ngoại lệ
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Cài đặt chế độ trả dữ liệu dạng mảng kết hợp
+        // cài đặt chế độ trả dữ liệu
         $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     
         return $conn;
@@ -22,84 +22,61 @@ function connectDB() {
     }
 }
 
+// Hàm thêm file dùng chung
 function uploadFile($file, $folderUpload){
-    // Đảm bảo rằng thư mục tồn tại
-    if (!is_dir(PATH_ROOT . $folderUpload)) {
-        mkdir(PATH_ROOT . $folderUpload, 0755, true);
-    }
+    $pathStorage = $folderUpload . time() . $file["name"];
 
-    // Tạo đường dẫn lưu trữ với tên file duy nhất
-    $pathStorage = $folderUpload . time() . '_' . basename($file['name']);
-    $from = $file['tmp_name'];
+    $from = $file ["tmp_name"];
     $to = PATH_ROOT . $pathStorage;
-
-    if (move_uploaded_file($from, $to)) {
+    if(move_uploaded_file($from, $to)){
         return $pathStorage;
     }
-
     return null;
-}
-
-// Xóa file
+} 
+// Hàm xóa file
 function deleteFile($file){
     $pathDelete = PATH_ROOT . $file;
-    if (file_exists($pathDelete)) {
+    if(file_exists($pathDelete)){
         unlink($pathDelete);
     }
 }
 
 // Xóa session sau khi load trang
 function deleteSessionError(){
-    if (isset($_SESSION['flash'])) {
-        // Hủy session sau khi đã tải lại trang
-        unset($_SESSION['flash']);
-        unset($_SESSION['error']);
-    }
-}
+   if(isset($_SESSION['flash'])){
+    // Hủy Session sau khi đã tải trang
+    unset($_SESSION['flash']);
+    unset($_SESSION['error']);
+    unset($_SESSION['success']);
+    // session_unset();
+    // session_destroy();
 
-// Upload Album Ảnh
+   }
+}
+// upload  - update album ảnh
 function uploadFileAlbum($file, $folderUpload, $key){
-    // Đảm bảo rằng thư mục tồn tại
-    if (!is_dir(PATH_ROOT . $folderUpload)) {
-        mkdir(PATH_ROOT . $folderUpload, 0755, true);
-    }
+    $pathStorage = $folderUpload . time() . $file["name"][$key];
 
-    // Tạo tên tệp an toàn hơn
-    $filename = time() . '_' . basename($file['name'][$key]);
-    $pathStorage = $folderUpload . $filename;
-
-    $from = $file['tmp_name'][$key];
+    $from = $file ["tmp_name"][$key];
     $to = PATH_ROOT . $pathStorage;
-
-    // Kiểm tra lỗi tải lên
-    if ($file['error'][$key] === UPLOAD_ERR_OK) {
-        if (move_uploaded_file($from, $to)) {
-            return $pathStorage;
-        } else {
-            error_log('Failed to move uploaded file.');
-        }
-    } else {
-        error_log('Upload error code: ' . $file['error'][$key]);
+    if(move_uploaded_file($from, $to)){
+        return $pathStorage;
     }
-
     return null;
-}
-
-
-// Định dạng ngày
+} 
 function formatDate($date){
     return date("d-m-Y", strtotime($date));
 }
 
-// Kiểm tra đăng nhập Admin
 function checkLoginAdmin(){
-    if (!isset($_SESSION['user_admin'])) { // Không có session thì chuyển về trang login
-        header("Location: " . BASE_URL_ADMIN . '?act=login-admin');
+    if(!isset($_SESSION['user_admin'])){ // Không có session thì redirect về trang login
+        // header("Location: " . BASE_URL_ADMIN . "?act=login-admin");
+        require_once "./views/auth/formLogin.php";
         exit();
     }
+
+function formatPrice($price){
+    return number_format($price, 0, ',', '.');
 }
 
-// Định dạng giá
-function formatPrice($price) {
-    return number_format($price, 0, ',', '.');
 }

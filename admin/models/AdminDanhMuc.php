@@ -7,7 +7,7 @@ class AdminDanhMuc{
     }
     public function getAllDanhMuc(){
         try{
-            $sql = "SELECT * FROM danh_mucs";
+            $sql = "SELECT * FROM categorys";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -19,7 +19,7 @@ class AdminDanhMuc{
     }
     public function insertDanhMuc($ten_danh_muc, $mo_ta){
         try{
-            $sql = "INSERT INTO danh_mucs(ten_danh_muc, mo_ta) VALUES(:ten_danh_muc, :mo_ta)";
+            $sql = "INSERT INTO categorys(ten_danh_muc, mo_ta) VALUES(:ten_danh_muc, :mo_ta)";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -35,7 +35,7 @@ class AdminDanhMuc{
 
     public function getDetailDanhMuc($id){
         try{
-            $sql = 'SELECT * FROM danh_mucs WHERE id = :id' ;
+            $sql = 'SELECT * FROM categorys WHERE id = :id' ;
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':id' => $id,
@@ -51,7 +51,7 @@ class AdminDanhMuc{
 
     public function updateDanhMuc($id,$ten_danh_muc, $mo_ta){
         try{
-            $sql = "UPDATE danh_mucs SET ten_danh_muc = :ten_danh_muc, mo_ta = :mo_ta WHERE id = :id";
+            $sql = "UPDATE categorys SET ten_danh_muc = :ten_danh_muc, mo_ta = :mo_ta WHERE id = :id";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -68,7 +68,7 @@ class AdminDanhMuc{
     }
     public function destroyDanhMuc($id){
         try{
-            $sql = 'DELETE FROM danh_mucs WHERE id = :id';
+            $sql = 'DELETE FROM categorys WHERE id = :id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':id' => $id,

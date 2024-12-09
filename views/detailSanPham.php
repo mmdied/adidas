@@ -62,11 +62,13 @@
                                     </div>
                                     <div class="price-box">
                                         <?php if ($sanPham['gia_khuyen_mai']) { ?>
-                                            <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ'; ?></span>
-                                            <span class="price-old"><del><?= formatPrice($sanPham['gia_san_pham']) . 'đ'; ?></del></span>
+                                            <span class="price-regular"><?= $sanPham['gia_khuyen_mai'] . 'đ' ?></span>
+                                            <span class="price-old"><del><?= $sanPham['gia_san_pham'] . 'đ' ?></del></span>
                                         <?php } else { ?>
-                                            <span class="price-old"><del><?= formatPrice($sanPham['gia_san_pham']) . 'đ'; ?></del></span>
-                                        <?php } ?>
+                                            <span class="price-regular"><?= $sanPham["gia_san_pham"] . 'đ' ?></span>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
 
                                     <div class="availability">
@@ -75,16 +77,16 @@
                                     </div>
                                     <p class="pro-desc"><?= $sanPham['mo_ta'] ?></p>
                                     <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="post">
-                                    <div class="quantity-cart-box d-flex align-items-center">
-                                        <h6 class="option-title">Số Lượng:</h6>
-                                        <div class="quantity">
-                                            <input type="hidden" name="san_pham_id" value="<?= $sanPham['id']; ?>">
-                                            <div class="pro-qty"><input type="text" value="1" name="so_luong"></div>
+                                        <div class="quantity-cart-box d-flex align-items-center">
+                                            <h6 class="option-title">Số Lượng:</h6>
+                                            <div class="quantity">
+                                                <input type="hidden" name="san_pham_id" value="<?= $sanPham['id']; ?>">
+                                                <div class="pro-qty"><input type="text" value="1" name="so_luong"></div>
+                                            </div>
+                                            <div class="action_link">
+                                                <button class="btn btn-cart2">Thêm Giỏ Hàng</button>
+                                            </div>
                                         </div>
-                                        <div class="action_link">
-                                            <button class="btn btn-cart2">Thêm Giỏ Hàng</button>
-                                        </div>
-                                    </div>
                                     </form>
                                 </div>
                             </div>
@@ -109,7 +111,7 @@
                                             <?php foreach ($listBinhLuan as $binhLuan): ?>
                                                 <div class="total-reviews">
                                                     <div class="rev-avatar">
-                                                        <img src="<?= $binhLuan['anh_dai_dien'] ?>" alt="">
+                                                        <img src="https://i.pinimg.com/236x/5e/e0/82/5ee082781b8c41406a2a50a0f32d6aa6.jpg" alt="">
                                                     </div>
                                                     <div class="review-box">
 
@@ -199,11 +201,13 @@
                                     </h6>
                                     <div class="price-box">
                                         <?php if ($sanPham['gia_khuyen_mai']) { ?>
-                                            <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ'; ?></span>
-                                            <span class="price-old"><del><?= formatPrice($sanPham['gia_san_pham']) . 'đ'; ?></del></span>
+                                            <span class="price-regular"><?= $sanPham['gia_khuyen_mai'] . 'đ' ?></span>
+                                            <span class="price-old"><del><?= $sanPham['gia_san_pham'] . 'đ' ?></del></span>
                                         <?php } else { ?>
-                                            <span class="price-old"><del><?= formatPrice($sanPham['gia_san_pham']) . 'đ'; ?></del></span>
-                                        <?php } ?>
+                                            <span class="price-regular"><?= $sanPham["gia_san_pham"] . 'đ' ?></span>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>

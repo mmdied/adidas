@@ -20,6 +20,16 @@
           <div class="col-sm-6">
             <h1>Quản Lý Danh Sách đơn hàng </h1>
           </div>
+          <div class="col-sm-6">
+          <?php  
+            // Kiểm tra và hiển thị thông báo nếu có  
+            if (isset($_SESSION['message'])) {  
+                echo '<div class="alert alert-success">' . $_SESSION['message'] . '</div>';  
+                // Xóa thông báo khỏi session sau khi hiển thị  
+                unset($_SESSION['message']);  
+            }  
+            ?>
+          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -101,9 +111,16 @@
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
       "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true, 
     });
   });
 </script>

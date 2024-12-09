@@ -30,12 +30,9 @@
                                                 <a href="<?= BASE_URL ?>">Trang Chủ</a>
                                             </li>
 
-                                            <li><a href="#">Sản Phẩm<i class="fa fa-angle-down"></i></a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
-                                                </ul>
+                                            <li><a href="<?= BASE_URL . '?act=san-pham' ?>">Sản Phẩm<i class="fa fa-angle-down"></i></a>
                                             </li>
-                                            <li><a href="#">Giới Thiệu</a></li>
+                                            <li><a href="<?= BASE_URL . '?act=gio-hang' ?>">Giỏ Hàng</a></li>
                                             <li><a href="#">Liên Hệ</a></li>
                                         </ul>
                                     </nav>
@@ -58,8 +55,12 @@
                                 <div class="header-configure-area">
                                     <ul class="nav justify-content-end">
                                         <label for="">
-                                            <?php if (isset($_SESSION['user_client'])) {
-                                                echo $_SESSION['user_client'];
+                                            <?php if (isset($_SESSION["user_client"])) {
+                                                // echo $_SESSION["user_client"];
+                                                $originalString = $_SESSION["user_client"];
+                                                $arrayOfStrings = explode("@", $originalString); // Cắt theo @
+                                                $firstPart = $arrayOfStrings[0]; // Lấy phần đầu tiên  
+                                                echo $firstPart;
                                             } ?>
                                         </label>
                                         <li class="user-hover">
@@ -67,10 +68,13 @@
                                                 <i class="pe-7s-user"></i>
                                             </a>
                                             <ul class="dropdown-list">
-                                                <?php if (!isset($_SESSION['user_client'])) { ?>
-                                                    <li><a href="<?= BASE_URL . '?act=login' ?>">Đăng Nhập</a></li>
-                                                <?php } else { ?>
-                                                    <li><a href="my-account.html">Tài Khoản</a></li>
+                                                <?php if(!isset($_SESSION["user_client"])){ ?>
+                                                        <li><a href="<?= BASE_URL . "?act=login"?>">Đăng nhập</a></li>
+                                                        <li><a href="<?= BASE_URL . "?act=register"?>">Đăng kí</a></li>
+                                                <?php }else{ ?>
+                                                        <li><a href="my-account.html">Tài khoản</a></li>
+                                                        <li><a href="<?= BASE_URL . '?act=logout' ?>">Đăng xuất</a></li>
+                                                    
                                                 <?php } ?>
                                             </ul>
                                         </li>

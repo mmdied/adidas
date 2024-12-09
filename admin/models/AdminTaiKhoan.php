@@ -10,7 +10,7 @@ class AdminTaiKhoan
     public function getAllTaiKhoan($chuc_vu_id)
     {
         try {
-            $sql = 'SELECT * FROM tai_khoans WHERE chuc_vu_id = :chuc_vu_id';
+            $sql = 'SELECT * FROM users WHERE chuc_vu_id = :chuc_vu_id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':chuc_vu_id' => $chuc_vu_id]);
             return $stmt->fetchALL();
@@ -21,7 +21,7 @@ class AdminTaiKhoan
     public function insertTaiKhoan($ho_ten, $email, $password, $chuc_vu_id)
     {
         try {
-            $sql = "INSERT INTO tai_khoans (ho_ten, email, mat_khau, chuc_vu_id) 
+            $sql = "INSERT INTO users (ho_ten, email, mat_khau, chuc_vu_id) 
                     VALUES (:ho_ten, :email, :password, :chuc_vu_id)";
 
             $stmt = $this->conn->prepare($sql);
@@ -42,7 +42,7 @@ class AdminTaiKhoan
     public function getDetailTaiKhoan($id)
     {
         try {
-            $sql = 'SELECT * FROM tai_khoans WHERE id = :id';
+            $sql = 'SELECT * FROM users WHERE id = :id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':id' => $id,
@@ -56,7 +56,7 @@ class AdminTaiKhoan
     public function updateTaiKhoan($id, $ho_ten, $email,  $so_dien_thoai, $trang_thai)
     {
         try {
-            $sql = 'UPDATE tai_khoanS SET 
+            $sql = 'UPDATE users SET 
                     ho_ten = :ho_ten,
                     email = :email,
                     so_dien_thoai = :so_dien_thoai,
@@ -79,7 +79,7 @@ class AdminTaiKhoan
     public function resetPassword($id, $mat_khau)
     {
         try {
-            $sql = 'UPDATE tai_khoanS SET 
+            $sql = 'UPDATE users SET 
                     mat_khau = :mat_khau
                 WHERE id = :id';
             $stmt = $this->conn->prepare($sql);
@@ -96,7 +96,7 @@ class AdminTaiKhoan
     public function updateKhachHang($id, $ho_ten, $email,  $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi, $trang_thai)
     {
         try {
-            $sql = 'UPDATE tai_khoanS SET ho_ten = :ho_ten,
+            $sql = 'UPDATE users SET ho_ten = :ho_ten,
                     email = :email,
                     so_dien_thoai = :so_dien_thoai,
                     ngay_sinh = :ngay_sinh,
@@ -125,7 +125,7 @@ class AdminTaiKhoan
     public function checkLogin($email, $mat_khau)
     {
         try {
-            $sql = "SELECT * FROM tai_khoans WHERE email = :email";
+            $sql = "SELECT * FROM users WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(['email' => $email]);
             $user = $stmt->fetch();
@@ -152,7 +152,7 @@ class AdminTaiKhoan
     public function getTaiKhoanformEmail($email)
     {
         try {
-            $sql = 'SELECT * FROM tai_khoans WHERE email= :email';
+            $sql = 'SELECT * FROM users WHERE email= :email';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':email' => $email,

@@ -1,3 +1,4 @@
+
 <?php 
 session_start();
 // Require file Common
@@ -10,7 +11,10 @@ require_once './controllers/HomeController.php';
 // Require toàn bộ file Models
 require_once './models/SanPham.php'; 
 require_once './models/TaiKhoan.php'; 
-require_once './models/GioHang.php'; 
+require_once './models/GioHang.php';
+require_once './models/DanhMuc.php';
+require_once './models/DonHang.php';
+
 
 
 // Route
@@ -20,15 +24,31 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     // Trang chủ
-    '/'=>(new HomeController())->home(),
+    '/' => (new HomeController())->home(),
 
-    'chi-tiet-san-pham'=>(new HomeController())->chiTietSanPham(),
+    // Chi tiết sản phẩm
+    'chi-tiet-san-pham' => (new HomeController())->chiTietSanPham(),
 
+    // Đăng nhập
     'login' => (new HomeController())->formLogin(),
-
     'check-login' => (new HomeController())->postLogin(),
 
+    // Đăng ký
+   'register' => $_SERVER['REQUEST_METHOD'] === 'POST' 
+    ? (new HomeController())->postRegister()
+    : (new HomeController())->formRegister(),
+    'logout' => (new HomeController())->logout(),
+    
     'them-gio-hang' => (new HomeController())->addGioHang(),
-
     'gio-hang' => (new HomeController())->gioHang(),
+    'san-pham' => (new HomeController())->sanPham(),
+   
+    'xoa-san-pham-cart' => (new HomeController())->deleteOneGioHang(),  
+
+    'thanh-toan' => (new HomeController())->thanhToan(),
+    'xu-ly-thanh-toan' =>(new HomeController())->postThanhToan(),
+    // 'tim-kiem' => (new HomeController())->timKiem(),
+    'incQty' => (new HomeController())->incQtyCart(),
+    'decQty' => (new HomeController())->decQtyCart(),
+
 };

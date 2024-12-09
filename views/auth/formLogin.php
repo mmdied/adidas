@@ -31,9 +31,9 @@
                         <div class="login-reg-form-wrap">
                             <h5 class="text-center">Đăng Nhập</h5>
                             <?php if (isset($_SESSION['error'])) { ?>
-                                <p class="text-danger login-box-msg text-center"><?= $_SESSION['error']; ?></p>
+                                <p class="text-danger text-center"><?= $_SESSION['error'] ?></p>
                             <?php } else { ?>
-                                <p class="login-box-msg text-center">Vui lòng đăng nhập</p>
+                                <p class="login-box-msg">Vui lòng đăng nhập</p>
                             <?php } ?>
                             <form action="<?= BASE_URL . '?act=check-login' ?>" method="post">
                                 <div class="single-input-item">

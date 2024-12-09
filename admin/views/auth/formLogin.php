@@ -19,7 +19,7 @@
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="./assets/index2.html" class="h1">BÁN THÚ CƯNG</a>
+                <a href="./assets/index2.html" class="h1">BÁN GIẦY ADIDAS</a>
             </div>
             <div class="card-body">
                 <?php if (isset($_SESSION['error'])) { ?>
